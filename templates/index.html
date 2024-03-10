@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>WebSocket Example</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
+    <script type="text/javascript" charset="utf-8">
+        var socket = io.connect('http://' + document.domain + ':' + location.port);
+
+        socket.on('message', function(data) {
+            console.log('Received message: ' + data);
+            // Do something with the received data, like updating the DOM
+        });
+
+        function sendMessage() {
+            var message = document.getElementById('message').value;
+            socket.emit('message', message);
+            document.getElementById('message').value = '';
+        }
+    </script>
+</head>
+<body>
+    <input type="text" id="message" placeholder="Type a message...">
+    <button onclick="sendMessage()">Send</button>
+</body>
+</html>
